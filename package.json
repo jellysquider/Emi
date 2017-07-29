@@ -1,0 +1,29 @@
+{
+  "name": "refugeeapp",
+  "version": "1.0.0",
+  "description": "An app to help refugees and other immigrants find the nations that are best for them.",
+  "main": "app.js",
+  "scripts": {
+    "start": "babel-node app.js --presets es2015,stage-2",
+    "test": "node app.js"
+  },
+  "keywords": [
+    "refugee",
+    "immigration",
+    "nations"
+  ],
+  "author": "Valeska Victoria & Gabriela Medvetska",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "rapid-io": "^0.4.1",
+    "socket.io": "^2.0.3",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1"
+  }
+}

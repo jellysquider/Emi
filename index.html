@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+
+    <title>Socket.IO chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; margin: 0; padding: 0; }
+      #messages li { padding: 5px 10px; }
+      #messages li:nth-child(odd) { background: #eee; }
+      #messages { margin-bottom: 40px }
+    </style>
+
+</head>
+
+<body>
+  <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+      console.log("hai");
+      var socket = io.connect('http://localhost:3000');
+      //var uuid = uuidv4(); // -> v4 UUID
+      socket.emit('welcome', {msg: "Hi!"});
+      //$('#messages').append($('<li>').text(uuid));
+      //window.scrollTo(0, document.body.scrollHeight);
+      var msg = {
+                  canDrive: true,
+                  isDisabled: false,
+                  isMinority: false,
+                  isLiterate: true,
+                  status: 1,
+                  originCountry: "US",
+                  isEducated: true,
+                  priority: 3
+      };
+
+      console.log(msg);
+      socket.emit('searchSettings', msg);
+      console.log("sent! ^-^");
+
+      socket.on('searchResults', function(msg){
+          console.log("OMG SO COOL!!!");
+          console.log("Received data:" + msg);
+              if( Object.prototype.toString.call(msg) === '[object Array]' ) {
+                console.log( 'Array ahoy!' );
+                for(var i = 0; i < msg.length; i++) {
+                  console.log("For array:" + msg[i]);
+                  console.log("more:" + msg[0].body);
+                  $('#messages').append($('<li>').text(msg[i].countryName + "\n" + msg[i].shortDesc));
+                  window.scrollTo(0, document.body.scrollHeight);
+              }
+            }
+            else {
+              $('#messages').append($('<li>').text(msg.countryName + "\n" + msg.shortDesc));
+              window.scrollTo(0, document.body.scrollHeight);
+            }
+        });
+  </script>
+</body>
+
+</html>
