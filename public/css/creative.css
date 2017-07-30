@@ -300,6 +300,10 @@ section#contact .text-danger {
   color: #3498db;
 }
 
+.text-add {
+  color: #2980b9;
+}
+
 .no-gutter > [class*='col-'] {
   padding-right: 0;
   padding-left: 0;
