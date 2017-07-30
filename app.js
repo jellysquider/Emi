@@ -145,25 +145,31 @@ function googleAuth() {
 
 }
 
+function getProfileData(msg) {
+
+  console.log("getProfileData:" + msg);
+
+  client
+    .collection(RAPID_TODO_COLLECTION_NAME)
+    .filter({ and: [
+            { $id: msg.uuid }
+            ]})
+    .fetch(userData =>  {
+      socket.emit("userData", userData[0].body);
+    }, error => {
+      // once the error block is called the subscription is automatically canceled
+      // and will no longer receive and updates
+      console.log(err.message)
+      if (err.type === 'permission-denied') {
+        console.log(err.message) // you are not allowed to access data
+      }
+    })
+
+}
+
 io.on('connection', function(socket){
   socket.on('getProfileData', function(msg){
-    console.log("getProfileData:" + msg);
-
-    client
-      .collection(RAPID_TODO_COLLECTION_NAME)
-      .filter({ and: [
-              { $id: msg.uuid }
-              ]})
-      .fetch(userData =>  {
-        socket.emit("userData", userData[0].body);
-      }, error => {
-        // once the error block is called the subscription is automatically canceled
-        // and will no longer receive and updates
-        console.log(err.message)
-        if (err.type === 'permission-denied') {
-          console.log(err.message) // you are not allowed to access data
-        }
-      })
+    getProfileData(msg);
   });
   socket.on('saveProfileData', function(msg){
     console.log("saveProfileData:" + msg);
@@ -225,6 +231,7 @@ io.on('connection', function(socket){
   });
   socket.on('searchSettings', function(msg){
   console.log('searchSettings!');
+  msg = getProfileData(uuid);
   console.log('msg data:' + JSON.stringify(msg, 2, 0));
   client
     .collection(RAPID_TODO_COLLECTION_NAME)

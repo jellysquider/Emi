@@ -37,6 +37,18 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
+<div class="jumbotron text-center">
+    <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+
+    <p>Login or Register with:</p>
+
+    <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+    <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+    <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+    <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
+    <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
+</div>
+
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -242,9 +254,21 @@
 
     <!-- Theme JavaScript -->
     <script src="/js/creative.min.js"></script>
+    <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+
+    <script type="text/javascript" src="./smoothie-master/standalone/require.js"></script>
 
     <script>
+    var store = require('store')
     var socket = io.connect('http://localhost:3000');
+    var uuid = uuidv4(); // -> v4 UUID
+    var userID = store.get('uuid');
+    if(userID == null) {
+      store.set('uuid', uuid);
+      alert("The user is not logged in!");
+    }
+    console.log("uuid:" + uuid + " :" + userID);
+    //myStorage = window.localStorage;
     console.log("Hi!");
     $('#contactForm').submit(function(e){
       e.preventDefault();
