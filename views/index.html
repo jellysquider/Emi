@@ -245,6 +245,8 @@
     <!-- Theme JavaScript -->
     <script src="client/static/js/creative.min.js"></script>
 
+    <script type="text/javascript" src="rapidData.js"></script>
+
     <script>
     var socket = io.connect('http://localhost:3000');
     console.log("Hi!");
@@ -252,8 +254,7 @@
       e.preventDefault();
       console.log("yaay!");
       console.log("button clicked!");
-      var data = $("#contactForm :input");//.serializeArray();
-      //alert(data);
+      var data = $("#contactForm :input");
       var values = {
                   name: data[0].value,
                   email: data[1].value,
@@ -261,6 +262,7 @@
                   msg: data[3].value
       }
       socket.emit('contactUs', values);
+      //contactUs(values);
       console.log("sent! and button data:" + data[0].value);
       //$('#success').val('');
       return false;

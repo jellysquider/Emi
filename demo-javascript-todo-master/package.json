@@ -1,0 +1,22 @@
+{
+  "name": "rapido",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "prettier": "prettier --single-quote --no-semi --trailing-comma es5 --write '**/*.js'"
+  },
+  "engines": {
+    "node": "7.6.0"
+  },
+  "dependencies": {
+    "next": "^2.4.7",
+    "rapid-io": "^0.4.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.5.3"
+  }
+}
