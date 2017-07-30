@@ -2,6 +2,19 @@ const RAPID_TODO_COLLECTION_NAME = 'MediEmi';
 
 //module.exports {
 
+function stuff() {
+
+  $('#nav :checkbox').change(function() {
+      // this will contain a reference to the checkbox
+      if (this.checked) {
+          // the checkbox is now checked
+          $("#onetwo").insertBefore("#threeone");
+      } else {
+          // the checkbox is now no longer checked
+      }
+  });
+
+}
 
 function getUUID() {
 

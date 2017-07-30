@@ -70,7 +70,7 @@
         <!-- /.container-fluid -->
     </nav>
 
-    <div class="navbar-sidebar sidebar" role="navigation">
+    <div class="navbar-sidebar sidebar" role="navigation" id="nav">
         <div class="sidebar-nav navbar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
@@ -204,14 +204,14 @@
             </h3>
             <p>The best country to meet direct ancestors of the vikings!</p>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-3" id="onetwo">
             <img class="img-rounded img-responsive" src="http://images.alarabiya.net/b0/0c/640x392_29816_214556.jpg" alt="">
             <h3>France
                     <small>Recommendation - 89% </small>
             </h3>
             <p>The best country to eat super awesome ice-cream and fall in love, of course.</p>
           </div>
-          <div class="col-md-3 col-md-offset-2">
+          <div class="col-md-3 col-md-offset-2" id="threeone">
             <img class="img-rounded img-responsive" src="https://images.pexels.com/photos/258117/pexels-photo-258117.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb" alt="">
             <h3>United Kingdom
                     <small>Recommendation - 88% </small>
@@ -253,7 +253,7 @@
 
     <script src="/js/metisMenu.min.js"></script>
 
-    <script>$(".col-md-3").insertAfter(".col-md-offset-2");</script>
+    <script>$("#onetwo").insertBefore("#threeone");</script>
 
 </body>
 
