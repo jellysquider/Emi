@@ -2,10 +2,16 @@ var rapid = require('rapid-io')
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
+var path = require('path');
+
+// set up static files
+app.use(express.static(path.join(__dirname, '/public')));
+app.use('/bower_components', express.static(path.join(__dirname + '/bower_components')));
 
 app.set('port', (process.env.PORT || 3000));
 
 server.listen(app.get('port'));
+
 
 var io = require('socket.io')(server);
 
@@ -19,7 +25,7 @@ const client = rapid.createClient(API_KEY)
 //const todos = client.collection(RAPID_TODO_COLLECTION_NAME)
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/client/index.html');
+  res.sendFile(__dirname + '/index.html');
   /*console.log(req.path.replace("/", "").split("\n")[0])
   const newToDo = todos.newDocument()
   newToDo.mutate({
