@@ -256,17 +256,26 @@
     <script src="/js/creative.min.js"></script>
     <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
 
-    <script type="text/javascript" src="./smoothie-master/standalone/require.js"></script>
+    <script type="text/javascript" src="/bower_components/lockr/lockr.js"></script>
+    <script type="text/javascript" src="/bower_components/smoothie-master/standalone/require.js"></script>
 
     <script>
-    var store = require('store')
+    //var store = require('store')
     var socket = io.connect('http://localhost:3000');
     var uuid = uuidv4(); // -> v4 UUID
-    var userID = store.get('uuid');
+    Lockr.prefix = 'lockr';
+    try {
+      var userID = Lockr.get('uuid');
+    }
+    catch(e) {
+      console.log(e.name + ': ' + e.message);
+      Lockr.set('uuid', uuid);
+    }
     if(userID == null) {
-      store.set('uuid', uuid);
+      Lockr.set('uuid', uuid);
       alert("The user is not logged in!");
     }
+    var userID = Lockr.get('uuid');
     console.log("uuid:" + uuid + " :" + userID);
     //myStorage = window.localStorage;
     console.log("Hi!");
