@@ -1,3 +1,4 @@
+const fs = require('fs');
 var rapid = require('rapid-io')
 var express = require('express');
 var app = express();

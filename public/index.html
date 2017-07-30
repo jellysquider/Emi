@@ -257,45 +257,17 @@
     <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
 
     <script type="text/javascript" src="/bower_components/lockr/lockr.js"></script>
-    <script type="text/javascript" src="/bower_components/smoothie-master/standalone/require.js"></script>
+    <script type="text/javascript" src="/js/rapidData.js"></script>
+
+    <script src="https://unpkg.com/rapid-io/dist/rapid.umd.js"></script>
 
     <script>
-    //var store = require('store')
-    var socket = io.connect('http://localhost:3000');
-    var uuid = uuidv4(); // -> v4 UUID
-    Lockr.prefix = 'lockr';
-    try {
-      var userID = Lockr.get('uuid');
-    }
-    catch(e) {
-      console.log(e.name + ': ' + e.message);
-      Lockr.set('uuid', uuid);
-    }
-    if(userID == null) {
-      Lockr.set('uuid', uuid);
-      alert("The user is not logged in!");
-    }
-    var userID = Lockr.get('uuid');
-    console.log("uuid:" + uuid + " :" + userID);
-    //myStorage = window.localStorage;
-    console.log("Hi!");
-    $('#contactForm').submit(function(e){
-      e.preventDefault();
-      console.log("yaay!");
-      console.log("button clicked!");
-      var data = $("#contactForm :input");//.serializeArray();
-      //alert(data);
-      var values = {
-                  name: data[0].value,
-                  email: data[1].value,
-                  phone: data[2].value,
-                  msg: data[3].value
-      }
-      socket.emit('contactUs', values);
-      console.log("sent! and button data:" + data[0].value);
-      //$('#success').val('');
-      return false;
-    });
+    const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv'
+
+    const RAPID_TODO_COLLECTION_NAME = 'MediEmi' // Add your collection name right here
+
+    const client = Rapid.createClient(API_KEY);
+    contactUs()
     </script>
 
 </body>
