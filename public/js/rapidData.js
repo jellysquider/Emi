@@ -73,6 +73,7 @@ function profileData() {
     //e.preventDefault();
     console.log("button clicked!");
     saveProfileData(totalData);
+    window.location.replace("http://localhost:3000/results");
   });
 
 
@@ -188,14 +189,14 @@ function contactUs() {
 
 }
 
-function getUserData(msg, sortEPI) {
+function getUserData(sortEPI) {
 
   console.log("Entered getUserData");
 
   client
     .collection(RAPID_TODO_COLLECTION_NAME)
     .filter({ and: [
-            { $id: msg.uuid }
+            { $id: getUUID() }
             ]})
     .fetch(userData =>  {
       //socket.emit("userData", userData[0].body);
@@ -241,8 +242,8 @@ var and = [
 ]
 
 var pri = [
-          priority: 'asc',
-          EPI: 'asc'
+          { priority: 'asc' },
+          { EPI: 'asc' },
 ]
 
 if(!sortEPI) {
