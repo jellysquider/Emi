@@ -37,18 +37,6 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
-<div class="jumbotron text-center">
-    <h1><span class="fa fa-lock"></span> Node Authentication</h1>
-
-    <p>Login or Register with:</p>
-
-    <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-    <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-    <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
-    <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
-    <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google+</a>
-</div>
-
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -262,12 +250,9 @@
     <script src="https://unpkg.com/rapid-io/dist/rapid.umd.js"></script>
 
     <script>
-    const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv'
-
-    const RAPID_TODO_COLLECTION_NAME = 'MediEmi' // Add your collection name right here
-
-    const client = Rapid.createClient(API_KEY);
-    contactUs()
+      const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv';
+      const client = Rapid.createClient(API_KEY);
+      contactUs()
     </script>
 
 </body>

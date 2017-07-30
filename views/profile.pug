@@ -85,14 +85,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Required Information</div>
                     <div class="panel-body">
-                        <div class="Status">
-                            <button type="Status-name button" class="btn btn-default">Asylum
+                        <div class="Status" id="curStatus">
+                            <button type="Status-name button" class="btn btn-default" id="asylum">Asylum
                                 <span class="Status-icon glyphicon glyphicon-home" aria-hidden="true"></span>
                             </button>
-                            <button type="button" class="btn btn-default">Education
+                            <button type="button" class="btn btn-default" id="education">Education
                                 <span class="Status-icon glyphicon glyphicon-education" aria-hidden="true"></span>
                             </button>
-                            <button type="button" class="btn btn-default">Work
+                            <button type="button" class="btn btn-default" id="work">Work
                                 <span class="Status-icon glyphicon glyphicon-briefcase" aria-hidden="true"></span>
                             </button>
                         </div>
@@ -462,11 +462,11 @@
                         <div class="row">
                             <div class="col-sm-3 form-group">
                                 <label class="control-label">Date of birth</label>
-                                <input type='text' class="form-control" placeholder="dd/mm/yyyy" />
+                                <input type='text' class="form-control" placeholder="dd/mm/yyyy" id="DOB" />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-3 form-group">
+                            <div class="col-sm-3 form-group" id="gender">
                                 <label>Gender</label>
                                 <select class="form-control" placeholder="">
                                     <option value="" selected="selected" disabled="disabled"></option>
@@ -477,19 +477,19 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-6 form-group">
+                            <div class="col-sm-6 form-group" id="famSize">
                                 <label>Household size</label>
                                 <div class="btn-group" role="group" aria-label="">
-                                    <button type="button" class="btn btn-default">1</button>
-                                    <button type="button" class="btn btn-default">2</button>
-                                    <button type="button" class="btn btn-default">3</button>
-                                    <button type="button" class="btn btn-default">4</button>
-                                    <button type="button" class="btn btn-default">5+</button>
+                                    <button type="button" class="btn btn-default" id=1>1</button>
+                                    <button type="button" class="btn btn-default" id=2>2</button>
+                                    <button type="button" class="btn btn-default" id=3>3</button>
+                                    <button type="button" class="btn btn-default" id=4>4</button>
+                                    <button type="button" class="btn btn-default" id="5+">5+</button>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" class="btn btn-default">Submit Button</button>
+                            <button type="submit" class="btn btn-default" id="submitBtn">Submit Button</button>
                         </div>
                     </div>
                     <!-- /.col-lg-6 (nested) -->
@@ -525,14 +525,9 @@
     <script type="text/javascript" src="/js/rapidData.js"></script>
 
     <script src="https://unpkg.com/rapid-io/dist/rapid.umd.js"></script>
+    <script src="https://unpkg.com/deepmerge@1.5.0/dist/umd.js"></script>
 
-    <script>
-    const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv'
-
-    const RAPID_TODO_COLLECTION_NAME = 'MediEmi' // Add your collection name right here
-
-    const client = Rapid.createClient(API_KEY);
-    stuff(); </script>
+    <script>const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv';const client = Rapid.createClient(API_KEY);profileData();</script>
 
 </body>
 
