@@ -49,10 +49,10 @@ io.on('connection', function(socket){
         .collection(RAPID_TODO_COLLECTION_NAME)
         .newDocument()
         .mutate({ // create a new to-do and assign it to John
-        name: "",
-        email: "",
-        phone: "",
-        msg: ""
+          name: msg.name,
+          email: msg.email,
+          phone: msg.phone,
+          msg: msg.msg
       })
       .then(
         () => console.log('success'),

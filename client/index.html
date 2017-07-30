@@ -36,21 +36,6 @@
 <body id="page-top">
 <script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-<script>
-var socket = io.connect('http://localhost:3000');
-console.log("Hi!");
-$('#contactForm').submit(function(e){
-  e.preventDefault();
-  alert("yaay!");
-  console.log("button clicked!");
-  socket.emit('contactUs', $('#contactForm').val());
-  console.log("sent! and button data:" + $('#contactForm').val());
-  //$('#success').val('');
-  return false;
-});
-
-
-</script>
 
 <button type="submit" class="btn btn-xl" id="stuff">Send Message</button>
 
@@ -259,6 +244,30 @@ $('#contactForm').submit(function(e){
 
     <!-- Theme JavaScript -->
     <script src="client/static/js/creative.min.js"></script>
+
+    <script>
+    var socket = io.connect('http://localhost:3000');
+    console.log("Hi!");
+    $('#contactForm').submit(function(e){
+      e.preventDefault();
+      console.log("yaay!");
+      console.log("button clicked!");
+      var data = $("#contactForm :input");//.serializeArray();
+      //alert(data);
+      var values = {
+                  name: data[0].value,
+                  email: data[1].value,
+                  phone: data[2].value,
+                  msg: data[3].value
+      }
+      socket.emit('contactUs', values);
+      console.log("sent! and button data:" + data[0].value);
+      //$('#success').val('');
+      return false;
+    });
+
+
+    </script>
 
 </body>
 
