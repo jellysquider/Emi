@@ -2,9 +2,9 @@ const RAPID_TODO_COLLECTION_NAME = 'MediEmi';
 
 //module.exports {
 
-function profileData() {
-  console.log("hello!")
-  var socket = io.connect('http://localhost:3000');
+
+function getUUID() {
+
   var uuid = uuidv4(); // -> v4 UUID
   Lockr.prefix = 'lockr';
   try {
@@ -21,10 +21,16 @@ function profileData() {
   }
   var userID = Lockr.get('uuid');
   console.log("uuid:" + uuid + " :" + userID);
+  return userID;
+}
+
+function profileData() {
+  console.log("hello!")
+  //var socket = io.connect('http://localhost:3000');
   //myStorage = window.localStorage;
   console.log("Hi!");
   var totalData = {};
-  totalData.uuid = userID;
+  totalData.uuid = getUUID();
   $('#curStatus').click(function(e){
     //e.preventDefault();
     console.log("button clicked!");
@@ -137,26 +143,6 @@ function saveProfileData(msg) {
 
 function contactUs() {
 
-  console.log("hello!")
-  var socket = io.connect('http://localhost:3000');
-  var uuid = uuidv4(); // -> v4 UUID
-  Lockr.prefix = 'lockr';
-  try {
-    var userID = Lockr.get('uuid');
-    console.log("first uuid!" + userID);
-  }
-  catch(e) {
-    console.log(e.name + ': ' + e.message);
-    Lockr.set('uuid', uuid);
-  }
-  if(userID == null) {
-    Lockr.set('uuid', uuid);
-    alert("The user is not logged in!");
-  }
-  var userID = Lockr.get('uuid');
-  console.log("uuid:" + uuid + " :" + userID);
-  //myStorage = window.localStorage;
-  console.log("Hi!");
   $('#contactForm').submit(function(e){
     e.preventDefault();
     console.log("yaay!");
@@ -202,24 +188,98 @@ function contactUs() {
 
 }
 
+function getUserData(msg, sortEPI) {
 
+  console.log("Entered getUserData");
 
-function getSearchResults(msg) {
-
-  console.log('searchSettings!');
-  console.log('msg data:' + JSON.stringify(msg, 2, 0));
   client
     .collection(RAPID_TODO_COLLECTION_NAME)
     .filter({ and: [
-              { canDrive: msg.canDrive },
-              { isDisabled: msg.isDisabled },
-              { isMinority: msg.isMinority },
-              { isLiterate: msg.isLiterate },
-              { status: msg.status },
-              { originCountry: msg.originCountry },
-              { isEducated: msg.isEducated } ]
-              })
-    .order({ priority: 'asc' })
+            { $id: msg.uuid }
+            ]})
+    .fetch(userData =>  {
+      //socket.emit("userData", userData[0].body);
+      console.log(JSON.stringify(userData[0].body));
+      return getSearchResults(userData[0].body, sortEPI);
+    }, error => {
+      // once the error block is called the subscription is automatically canceled
+      // and will no longer receive and updates
+      console.log(err.message)
+      if (err.type === 'permission-denied') {
+        console.log(err.message) // you are not allowed to access data
+      }
+    })
+
+}
+
+function getSearchResults(msg, sortEPI) {
+
+  //var msg = getUserData({uuid: getUUID()});
+
+  var searchCriteria = {canDrive: true, isDisabled: true, isLiterate: true, status: true};
+
+  console.log('searchSettings!');
+  console.log('msg data:' + JSON.stringify(msg, 2, 0));
+  Object.keys(msg).forEach(function(k) {
+    if(searchCriteria.hasOwnProperty(k)) {
+        console.log("searchCriteria contains:" + k);
+    } else {
+      if(k != "priority") {
+        delete msg[k];
+    }
+    }
+});
+
+var and = [
+          { canDrive: msg.canDrive },
+          { isDisabled: msg.isDisabled },
+          { isMinority: msg.isMinority },
+          { isLiterate: msg.isLiterate },
+          { originCountry: msg.originCountry },
+          { isEducated: msg.isEducated },
+          { status: {cnt: msg.status}},
+]
+
+var pri = [
+          priority: 'asc',
+          EPI: 'asc'
+]
+
+if(!sortEPI) {
+  delete pri[1];
+}
+
+var filteredAnd = and.filter(obj => {
+  const key = Object.keys(obj)[0]
+  console.log(obj)
+  if(obj[key] !== undefined) {
+    try {
+    if(obj[key][0][0] != undefined && obj[key][0].length != 0 && obj[key][0].constructor === Object) {
+      return obj[key];
+  }}
+  catch(e) {
+    console.log(e.message);
+  }
+  if(obj[key] !== undefined) {
+    return obj[key];
+  }
+  }
+})
+
+var filteredPri = pri.filter(obj => {
+  const key = Object.keys(obj)[0]
+  console.log(obj)
+  if(obj[key] !== undefined) {
+    return obj[key];
+  }
+})
+
+console.log('msg data:' + JSON.stringify(msg, 2, 0));
+
+  client
+    .collection(RAPID_TODO_COLLECTION_NAME)
+    .filter({ and: filteredAnd })
+    .order({ and: filteredPri })
     .fetch(todos => {
       // TODO: update user interface
       console.log("Todos data:", JSON.stringify(todos));
@@ -231,8 +291,10 @@ function getSearchResults(msg) {
 
       if(todos != null) {
         for(var i = 0; i < todos.length; i++) {
-          socket.emit('searchResults', todos[i].body);
+          console.log(todos[i].body);
+          //socket.emit('searchResults', todos[i].body);
       }
+      return todos;
       }
     /*  for (var key in todos) {
         if (todos.hasOwnProperty(key)) {

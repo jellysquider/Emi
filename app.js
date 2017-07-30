@@ -2,7 +2,7 @@ const fs = require('fs');
 var rapid = require('rapid-io')
 var express = require('express');
 var app = express();
-var server = require('http').Server(app);
+//var server = require('http').Server(app);
 var passport = require('passport');
 var path = require('path');
 
@@ -12,10 +12,10 @@ app.use('/bower_components', express.static(path.join(__dirname + '/bower_compon
 
 app.set('port', (process.env.PORT || 3000));
 
-server.listen(app.get('port'));
+//server.listen(app.get('port'));
 
 
-var io = require('socket.io')(server);
+//var io = require('socket.io')(server);
 
 const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv'
 
@@ -146,7 +146,7 @@ function googleAuth() {
 
 }
 
-function getProfileData(msg) {
+/*function getProfileData(msg) {
 
   console.log("getProfileData:" + msg);
 
@@ -276,7 +276,7 @@ io.on('connection', function(socket){
         }
       }*/
       //console.log("Country name:" + todos[0].body.countryName);
-    }, error => {
+    /*}, error => {
       // once the error block is called the subscription is automatically canceled
       // and will no longer receive and updates
       console.log(err.message)
@@ -286,12 +286,12 @@ io.on('connection', function(socket){
     })
     console.log("Done with rapid io! ^-^")
 });
-});
+});*/
 
 /*http.listen(app.get('port'), function(){
   console.log('listening on *:' + app.get('port'));
 });*/
 
-/*app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
-});*/
+});
