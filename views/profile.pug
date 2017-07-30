@@ -37,6 +37,9 @@
 
 <body id="page-top">
 
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -498,7 +501,7 @@
         <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
-    
+
     <!-- jQuery -->
     <script src="/bower_components/jquery/jquery.min.js"></script>
 
@@ -516,6 +519,20 @@
     <!-- Countries List -->
     <script src="/js/country-list.js"></script>
 
+    <script src="http://wzrd.in/standalone/uuid%2Fv4@latest"></script>
+
+    <script type="text/javascript" src="/bower_components/lockr/lockr.js"></script>
+    <script type="text/javascript" src="/js/rapidData.js"></script>
+
+    <script src="https://unpkg.com/rapid-io/dist/rapid.umd.js"></script>
+
+    <script>
+    const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv'
+
+    const RAPID_TODO_COLLECTION_NAME = 'MediEmi' // Add your collection name right here
+
+    const client = Rapid.createClient(API_KEY);
+    stuff(); </script>
 
 </body>
 
