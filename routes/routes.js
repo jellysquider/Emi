@@ -12,7 +12,11 @@ module.exports = function(app, passport) {
 
     app.get('/profile', function (req, res) {
     res.render('profile')
-  });
+    });
+
+    app.get('/results', function (req, res) {
+    res.render('results')
+    });
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
