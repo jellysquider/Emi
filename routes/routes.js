@@ -1,18 +1,34 @@
+var express = require("express");
+var app     = express();
+
+
 module.exports = function(app, passport) {
 
 // normal routes ===============================================================
 
+// here you set that all templates are located in `/views` directory
+    app.use(express.static(__dirname + '/views'));
+    app.set('view engine', 'pug');
+
+    app.get('/profile', function (req, res) {
+    res.render('profile')
+    });
+
+    app.get('/results', function (req, res) {
+    res.render('results')
+    });
+
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.html');
+        res.sendFile('index.html');
     });
 
     // PROFILE SECTION =========================
-    app.get('/profile', isLoggedIn, function(req, res) {
-        res.render('profile.html', {
-            user : req.user
-        });
-    });
+    //app.get('/profile', isLoggedIn, function(req, res) {
+      //  res.sendFile('/profile.html', {
+        //    user : req.user
+        //});
+    //});
 
     // LOGOUT ==============================
     app.get('/logout', function(req, res) {

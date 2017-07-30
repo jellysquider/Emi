@@ -65,7 +65,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 // routes ======================================================================
-require('./routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
+require('./routes/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 function googleAuth() {
 
