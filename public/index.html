@@ -34,7 +34,6 @@
 
 </head>
 <body id="page-top">
-<script src="/socket.io/socket.io.js"></script>
 <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
@@ -150,7 +149,7 @@
                         <h4>Valeska Victoria</h4>
                         <p class="text-muted">Back-End Developer</p>
                         <ul class="list-inline social-buttons">
-                            <li><a href="https://twitter.com/govi_inc"><i class="fa fa-twitter"></i></a>
+                            <li><a href="https://twitter.com/vvictoriafr"><i class="fa fa-twitter"></i></a>
                             </li>
                             <li><a href="https://www.facebook.com/valeska.vic"><i class="fa fa-facebook"></i></a>
                             </li>
@@ -251,7 +250,8 @@
     <script>
       const API_KEY = 'NDA1OWE0MWo1b3AzYm5rLnJhcGlkLmlv';
       const client = Rapid.createClient(API_KEY);
-      contactUs()
+      getUserData(true);
+      contactUs();
     </script>
 
 </body>
